@@ -7,6 +7,7 @@
   const list = document.getElementById("list");
   const add = document.getElementById("add");
   const popup = document.getElementById("popup");
+  const json = document.getElementById("json");
 
   const apiURL = "https://6ae8bf021a7b15aaa50f6d8d.mockapi.io/api/v1/users";
 
@@ -122,6 +123,34 @@
               <td>${element.createdAt}</td>
             </tr>
           `;
+        });
+        html += "</table>";
+        answer.innerHTML = html;
+      });
+  });
+
+  json.addEventListener("click", () => {
+    fetch(
+      `https://raw.githubusercontent.com/robertposzelezny/2_3-server/main/db.json`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        let html = `<table style="width: 100%; border-collapse: collapse; text-align: center;">
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Body</th>
+              <th>Author</th>
+            </tr>`;
+        data.posts.forEach((element) => {
+          html += `
+                <tr>
+                    <td>${element.id}</td>
+                    <td>${element.title}</td>
+                    <td>${element.body}</td>
+                    <td>${element.author}</td>
+                </tr>
+            `;
         });
         html += "</table>";
         answer.innerHTML = html;
