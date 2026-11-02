@@ -8,6 +8,8 @@
   const add = document.getElementById("add");
   const popup = document.getElementById("popup");
 
+  const apiURL = "https://6ae8bf021a7b15aaa50f6d8d.mockapi.io/api/v1/users";
+
   example.addEventListener("click", function () {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
@@ -101,6 +103,28 @@
   });
 
   cw3.addEventListener("click", function () {
-    //TODO
+    fetch(apiURL)
+      .then((response) => response.json())
+      .then((array) => {
+        let html = `<table style="width: 100%; border-collapse: collapse; text-align: center;">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Create date</th>
+          </tr>`;
+        array.forEach((element) => {
+          html += `
+            <tr>
+              <td>${element.id}</td>
+              <td>${element.name}</td>
+              <td>${element.email}</td>
+              <td>${element.createdAt}</td>
+            </tr>
+          `;
+        });
+        html += "</table>";
+        answer.innerHTML = html;
+      });
   });
 })();
